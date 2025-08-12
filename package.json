@@ -6,10 +6,16 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:pull": "pnpm drizzle-kit pull",
+    "db:push": "pnpm drizzle-kit push",
+    "db:studio": "pnpm drizzle-kit studio"
   },
   "dependencies": {
+    "dotenv": "^17.2.1",
+    "drizzle-orm": "^0.44.4",
     "next": "15.4.6",
+    "pg": "^8.16.3",
     "query-string": "^9.2.2",
     "react": "19.1.1",
     "react-dom": "19.1.1"
@@ -18,8 +24,10 @@
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "^24.2.1",
+    "@types/pg": "^8.15.5",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
+    "drizzle-kit": "^0.31.4",
     "eslint": "^9.33.0",
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4.1.11",
