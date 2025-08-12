@@ -12,13 +12,19 @@
     "db:studio": "pnpm drizzle-kit studio"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.85.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "dotenv": "^17.2.1",
     "drizzle-orm": "^0.44.4",
+    "lucide-react": "^0.539.0",
     "next": "15.4.6",
     "pg": "^8.16.3",
     "query-string": "^9.2.2",
     "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "react-dom": "19.1.1",
+    "tailwind-merge": "^3.3.1",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
@@ -32,6 +38,7 @@
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4.1.11",
     "tsx": "^4.20.3",
+    "tw-animate-css": "^1.3.6",
     "typescript": "^5.9.2"
   }
 }
