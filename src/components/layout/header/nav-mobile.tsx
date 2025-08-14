@@ -2,22 +2,17 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Search, Home, Film, Tv, Play, Newspaper, Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { MobileMenu } from "./mobile-menu";
 import { SITE_CONFIG } from "@/lib/site-config";
 
-import type { Category } from "./typing";
+import { SearchBar } from "./search-bar";
+import { Logo } from "./logo";
+import { NAV_ICONS } from "./nav-icons";
 
-// 导航图标映射
-const NAV_ICONS: Record<string, any> = {
-  首页: Home,
-  影片: Film,
-  连续剧: Tv,
-  综艺片: Play,
-  新闻资讯: Newspaper,
-};
+import type { Category } from "./typing";
 
 type NavMobileProps = { categories: Category };
 
@@ -94,40 +89,6 @@ export function NavMobile({ categories }: NavMobileProps) {
     }
   }, [pathname, categories]);
 
-  const handleSearch = () => {
-    if (searchKeyword.trim()) {
-      // 构建搜索参数
-      const params = new URLSearchParams();
-      params.set("keywords", searchKeyword.trim());
-      // 如果当前在某个分类页面，添加对应的tagIds
-      const currentCategoryId = pathname.match(/\/category\/(\d+)/)?.[1];
-      if (currentCategoryId) {
-        params.set("tagIds", JSON.stringify([parseInt(currentCategoryId)]));
-      }
-      // 跳转到搜索结果页面
-      router.push(`/?${params.toString()}`);
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  const handleClearSearch = () => {
-    setSearchKeyword("");
-    // 清空后跳转到首页，不带搜索参数，自动请求最新列表
-    router.push("/");
-    // 聚焦到搜索框
-    const searchInput = document.querySelector(
-      'input[type="text"]'
-    ) as HTMLInputElement;
-    if (searchInput) {
-      searchInput.focus();
-    }
-  };
-
   const handleMobileNavClick = (item: (typeof SITE_CONFIG.nav.mobile)[0]) => {
     if (item.path === null) {
       setIsMobileMenuOpen(true);
@@ -144,59 +105,8 @@ export function NavMobile({ categories }: NavMobileProps) {
         {/* 第一行：Logo + 搜索框 */}
         <div className="px-4 py-3">
           <div className="flex items-center gap-3">
-            {/* Logo和标题 */}
-            <a href="/" className="flex items-center space-x-2 flex-shrink-0">
-              <div className="w-8 h-8 flex items-center justify-center">
-                <img
-                  src={SITE_CONFIG.logo.image}
-                  alt="Logo"
-                  className="w-6 h-6"
-                />
-              </div>
-              <div className="flex flex-col min-w-0">
-                <span className="text-base font-bold text-white leading-tight truncate">
-                  {SITE_CONFIG.shortName}
-                </span>
-              </div>
-            </a>
-            {/* 搜索框 */}
-            <div className="flex-1 min-w-0">
-              <form
-                className="relative flex bg-white rounded-full"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSearch();
-                }}
-              >
-                <input
-                  type="text"
-                  value={searchKeyword}
-                  onChange={(e) => setSearchKeyword(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="搜索视频..."
-                  className="flex-1 h-9 px-4 text-sm text-gray-700 focus:outline-none bg-transparent rounded-l-full"
-                  aria-label="搜索视频"
-                />
-                {/* 移动端清空按钮 */}
-                {searchKeyword && (
-                  <button
-                    type="button"
-                    onClick={handleClearSearch}
-                    className="absolute right-9 top-1/2 transform -translate-y-1/2 flex items-center justify-center w-5 h-5 text-gray-400 hover:text-gray-600 transition-colors"
-                    aria-label="清空搜索"
-                  >
-                    <X size={14} />
-                  </button>
-                )}
-                <button
-                  type="submit"
-                  className="flex items-center justify-center h-9 w-9 text-gray-700 rounded-r-full"
-                  aria-label="搜索"
-                >
-                  <Search size={18} />
-                </button>
-              </form>
-            </div>
+            <Logo />
+            <SearchBar className="max-w-full" />
           </div>
         </div>
 

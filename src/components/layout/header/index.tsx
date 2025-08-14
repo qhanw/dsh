@@ -10,7 +10,7 @@ export async function Header() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <header className={cn("fixed top-0 left-0 right-0 z-50 bg-primary-500")}>
+      <header className={cn("fixed top-0 left-0 right-0 z-50 bg-primary")}>
         <NavWeb categories={list} />
         <NavMobile categories={list} />
       </header>
