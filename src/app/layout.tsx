@@ -6,18 +6,13 @@ import { Footer } from "@/components/layout/footer";
 
 import { getHomeTDK } from "@/lib/tdk";
 
-import { queryCategories } from "@/actions/queryCategories";
-
 import "./globals.css";
 
 export const metadata: Metadata = getHomeTDK();
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const list = await queryCategories();
-
-  console.log(list);
   return (
     <html lang="zh-CN">
       <head>
@@ -38,7 +33,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased">
-       
+        <Header />
         {children}
         <Footer />
       </body>
