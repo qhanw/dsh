@@ -8,7 +8,7 @@ import { NavMobile } from "./nav-mobile";
 export async function Header() {
   const list = await queryCategories();
 
-  console.log(list)
+  console.log(list);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
