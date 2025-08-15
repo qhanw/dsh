@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { MobileMenu } from "./mobile-menu";
+import { NavSheet } from "./nav-sheet";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 import { SearchBar } from "./search-bar";
@@ -153,12 +153,7 @@ export function NavMobile({ categories }: NavMobileProps) {
             </div>
 
             {/* 右侧更多按钮 - 固定位置 */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="flex items-center justify-center text-sm text-white/90 hover:text-white transition-all duration-200 whitespace-nowrap py-2.5 px-4 rounded-md font-medium ml-2 flex-shrink-0"
-            >
-              <span>更多</span>
-            </button>
+            <NavSheet categories={categories} />
           </div>
         </div>
       </div>
@@ -200,17 +195,6 @@ export function NavMobile({ categories }: NavMobileProps) {
           })}
         </ul>
       </nav>
-
-      {/* 移动端菜单遮罩层和菜单 */}
-      {isMobileMenuOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/50 z-50 lg:hidden"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-          <MobileMenu onClose={() => setIsMobileMenuOpen(false)} />
-        </>
-      )}
     </>
   );
 }
