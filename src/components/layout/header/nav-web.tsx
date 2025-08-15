@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 import { SearchBar } from "./search-bar";
 import { Logo } from "./logo";
-import { NAV_ICONS } from "./nav-icons";
+import { navIcon } from "./nav-icons";
 
 import type { Category } from "./typing";
 
@@ -115,7 +115,7 @@ export const NavWeb = ({ categories }: NavWebProps = {}) => {
               </a>
             </li>
             {categories?.slice(0, 4).map((c) => {
-              const Icon = NAV_ICONS[c.name] || Film;
+              const Icon = navIcon(c.id);
               return (
                 <li
                   key={c.id}

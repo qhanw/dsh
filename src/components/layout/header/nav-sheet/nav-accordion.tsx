@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
-import { X, Home, Film, Tv, Play, Newspaper } from "lucide-react";
+import { Home, Film } from "lucide-react";
 
 import {
   Accordion,
@@ -12,18 +12,11 @@ import {
 
 import { cn } from "@/lib/utils";
 
+import { navIcon } from "../nav-icons";
+
 import type { Category } from "../typing";
 
 type NavAccordionProps = { categories: Category };
-
-// 导航图标映射
-const NAV_ICONS: Record<string, any> = {
-  首页: Home,
-  影片: Film,
-  连续剧: Tv,
-  综艺片: Play,
-  新闻资讯: Newspaper,
-};
 
 export function NavAccordion({ categories }: NavAccordionProps) {
   const pathname = usePathname();
@@ -99,9 +92,9 @@ export function NavAccordion({ categories }: NavAccordionProps) {
       </AccordionItem>
 
       {categories.map((c) => {
-        const Icon = NAV_ICONS[c.name] || Film;
+        const Icon = navIcon(c.id);
         return (
-          <AccordionItem value={c.name} className="border-b-0">
+          <AccordionItem key={c.id} value={c.name} className="border-b-0">
             <AccordionTrigger
               className={cn(
                 "items-center hover:no-underline cursor-pointer",
@@ -109,6 +102,7 @@ export function NavAccordion({ categories }: NavAccordionProps) {
                 "text-base text-gray-700 font-medium",
                 "[&[data-state=closed]>svg]:-rotate-90",
                 "[&[data-state=open]>svg]:rotate-0",
+                "[&[data-state=open]>svg]:text-white",
 
                 expandedCategory === c.id ||
                   (currentTagId &&

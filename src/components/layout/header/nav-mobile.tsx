@@ -10,7 +10,7 @@ import { SITE_CONFIG } from "@/lib/site-config";
 
 import { SearchBar } from "./search-bar";
 import { Logo } from "./logo";
-import { NAV_ICONS } from "./nav-icons";
+import { navIcon } from "./nav-icons";
 
 import type { Category } from "./typing";
 
@@ -165,7 +165,7 @@ export function NavMobile({ categories }: NavMobileProps) {
       >
         <ul className="flex justify-around">
           {SITE_CONFIG.nav.mobile.map((item) => {
-            const Icon = NAV_ICONS[item.name] || Menu;
+            const Icon = navIcon(item.id, Menu);
             const isActive = item.path
               ? item.path === "/"
                 ? pathname === "/"
