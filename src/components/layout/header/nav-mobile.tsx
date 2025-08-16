@@ -14,7 +14,7 @@ import { navIcon } from "./nav-icons";
 
 import type { Category } from "./typing";
 
-type NavMobileProps = { categories: Category };
+type NavMobileProps = { categories: Category[] };
 
 export function NavMobile({ categories }: NavMobileProps) {
   // 修复：添加必要的 state 和 hooks

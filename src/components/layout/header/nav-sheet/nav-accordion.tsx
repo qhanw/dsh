@@ -1,4 +1,5 @@
 "use client";
+import { useMemo } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 
@@ -14,38 +15,71 @@ import { cn } from "@/lib/utils";
 import { navIcon } from "../nav-icons";
 
 import type { Category } from "../typing";
-import { useMemo } from "react";
 
-type NavAccordionProps = { categories: Category };
+/** 查找所用父层 */
+function findParents(
+  data: Category[],
+  aim: string,
+  path: Category[] = []
+): Category[] | undefined {
+  for (const node of data) {
+    // 找到返回父级路径
+    if (node.id === aim) return path;
 
-export function NavAccordion({ categories }: NavAccordionProps) {
-  const params = useParams();
+    if (node.children) {
+      const res = findParents(node.children, aim, [...path, node]);
+      if (res) return res;
+    }
+  }
+  return undefined;
+}
 
-  console.log("params", params);
+type NavAccordionProps = { categories: Category[]; onClose?: () => void };
 
+export function NavAccordion({ categories, onClose }: NavAccordionProps) {
+  const params = useParams<{ category: string }>();
+
+  // 计算菜单选中状态
+  const { slug, pSlug } = useMemo(() => {
+    const s = params.category;
+    return { slug: s, pSlug: findParents(categories, s)?.at(-1)?.id || "0" };
+  }, [params, categories]);
+
+  // 或许取图标
   const Home = useMemo(() => navIcon("0"), []);
+
   return (
     <Accordion
       type="single"
       collapsible
-      className="w-full p-4 space-y-2"
-      defaultValue={(params.category as string) || "0"}
+      className="w-full p-4 space-y-2 mb-4"
+      defaultValue={pSlug}
       aria-label="移动端分类导航"
     >
       {/* 首页 */}
       <AccordionItem value="0" className="border-b-0 items-start">
-        <Link href="/" title="首页">
+        <Link href="/" title="首页" onClick={onClose}>
           <AccordionTrigger
             className={cn(
+              // 重置基础样式
               "items-center hover:no-underline cursor-pointer",
               "py-3 px-4 rounded-lg transition-colors",
               "text-base text-gray-700 font-medium",
+
+              // 调整右侧箭头图标样式
+              "[&>svg]:hidden",
+
+              // 打开样式
               "hover:bg-primary/10",
-              "[&[data-state=open]]:bg-primary",
-              "[&[data-state=open]]:text-white"
+              "[&[data-state=open]]:bg-primary/65",
+              "[&[data-state=open]]:text-white",
+
+              // 选中状态
+              pSlug === "0" &&
+                "bg-primary! text-white [&>svg]:text-white hover:bg-primary/85!"
             )}
           >
-            <span className="inline-flex items-center gap-3 [&+svg]:hidden">
+            <span className="inline-flex items-center gap-3">
               <Home size={18} />
               首页
             </span>
@@ -59,16 +93,24 @@ export function NavAccordion({ categories }: NavAccordionProps) {
           <AccordionItem key={c.id} value={c.id} className="border-b-0">
             <AccordionTrigger
               className={cn(
+                // 重置基础样式
                 "items-center hover:no-underline cursor-pointer",
                 "py-3 px-4 rounded-lg transition-colors",
                 "text-base text-gray-700 font-medium",
+
+                // 调整右侧箭头图标样式
                 "[&[data-state=closed]>svg]:-rotate-90",
                 "[&[data-state=open]>svg]:rotate-0",
                 "[&[data-state=open]>svg]:text-white",
 
+                // 打开样式
                 "hover:bg-primary/10",
                 "[&[data-state=open]]:bg-primary/65",
-                "[&[data-state=open]]:text-white"
+                "[&[data-state=open]]:text-white",
+
+                // 选中状态
+                c.id === pSlug &&
+                  "bg-primary! text-white [&>svg]:text-white hover:bg-primary/85!"
               )}
             >
               <span className="inline-flex items-center gap-3">
@@ -80,13 +122,17 @@ export function NavAccordion({ categories }: NavAccordionProps) {
             <AccordionContent className="flex flex-wrap gap-2 pl-2 pb-0 pt-2">
               {c.children?.map((it) => (
                 <Link
+                  onClick={onClose}
                   href={`/${it.id}`}
                   key={it.id}
+                  title={it.name}
                   className={cn(
-                    "px-3 py-1.5 rounded-full cursor-pointer text-sm font-medium text-gray-700 transition-colors border",
-                    (params.category as string) === it.id
+                    "px-3 py-1.5 cursor-pointer transition-colors",
+                    "rounded-full border border-gray-300",
+                    "text-sm font-medium text-gray-700",
+                    slug === it.id
                       ? "bg-primary text-white border-primary"
-                      : "bg-white hover:bg-primary/15 hover:text-primary border-gray-300"
+                      : "hover:bg-primary/15 hover:text-primary hover:border-primary/65"
                   )}
                 >
                   {it.name}

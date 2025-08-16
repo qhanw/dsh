@@ -6,18 +6,21 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SheetDescription,
   SheetTrigger,
 } from "@/components/ui/sheet";
 
 import { NavAccordion } from "./nav-accordion";
 
 import type { Category } from "../typing";
+import { useState } from "react";
 
-type NavSheetProps = { categories: Category };
+type NavSheetProps = { categories: Category[] };
 
 export function NavSheet({ categories }: NavSheetProps) {
+  const [open, setOpen] = useState(false);
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
           variant="outline"
@@ -40,12 +43,12 @@ export function NavSheet({ categories }: NavSheetProps) {
               <span className="text-lg font-bold text-gray-900">乡村电影</span>
             </div>
           </SheetTitle>
-          {/* <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </SheetDescription> */}
+          <SheetDescription className="hidden">
+            乡村电影 - 移动端分类导航
+          </SheetDescription>
         </SheetHeader>
 
-        <NavAccordion categories={categories} />
+        <NavAccordion categories={categories} onClose={() => setOpen(false)} />
       </SheetContent>
     </Sheet>
   );

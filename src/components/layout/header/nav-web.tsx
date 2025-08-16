@@ -12,7 +12,7 @@ import { navIcon } from "./nav-icons";
 import type { Category } from "./typing";
 
 // 在文件开头添加 props 接口
-type NavWebProps = { categories?: Category };
+type NavWebProps = { categories?: Category[] };
 
 export const NavWeb = ({ categories }: NavWebProps = {}) => {
   // 修复：添加必要的 state 和 hooks
