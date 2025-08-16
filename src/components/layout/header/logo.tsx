@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE_CONFIG } from "@/lib/site-config";
+import { SITE_CONFIG } from "@/cfg/site-config";
 
 export function Logo() {
   return (

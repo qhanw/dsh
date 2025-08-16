@@ -1,5 +1,5 @@
 import { handleApiError } from './error';
-import { getApiUrl } from './config';
+import { getApiUrl } from '../cfg';
 
 interface RequestOptions extends RequestInit {
   params?: Record<string, string | number | boolean>;

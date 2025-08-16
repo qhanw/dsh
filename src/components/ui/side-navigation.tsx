@@ -12,7 +12,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-import { SITE_CONFIG } from "@/lib/config";
+import { SITE_CONFIG } from "@/cfg";
 
 interface SideNavigationProps {
   isOpen: boolean;

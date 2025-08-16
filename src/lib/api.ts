@@ -1,6 +1,6 @@
 import { TagResponse } from '@/types/navigation';
 import { VideoDetailResponse, VideoListResponse, VideoQueryParams } from '@/types/video';
-import { API_CONFIG } from './config';
+import { API_CONFIG } from '../cfg';
 import { request } from './request';
 
 // 获取导航数据
