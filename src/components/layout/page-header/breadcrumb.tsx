@@ -18,17 +18,15 @@ export function Breadcrumb({ categories }: BreadcrumbProps) {
   }, [info]);
 
   return (
-    <header className="mb-6">
-      <nav className="text-sm text-gray-600" aria-label="面包屑导航">
-        <ol className="flex items-center">
-          {breadcrumbs.map((c, idx) => (
-            <li key={idx}>
-              {idx > 0 && <span className="mx-2">/</span>}
-              {c}
-            </li>
-          ))}
-        </ol>
-      </nav>
-    </header>
+    <nav className="text-sm text-gray-600" aria-label="面包屑导航">
+      <ol className="flex items-center">
+        {breadcrumbs.map((c, idx) => (
+          <li key={idx}>
+            {idx > 0 && <span className="mx-2">/</span>}
+            {c}
+          </li>
+        ))}
+      </ol>
+    </nav>
   );
 }

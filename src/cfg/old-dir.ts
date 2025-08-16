@@ -1,4 +1,4 @@
-export const dir = [
+export const oldDir = [
   "actor",
   "aiqingpian",
   "bagua",

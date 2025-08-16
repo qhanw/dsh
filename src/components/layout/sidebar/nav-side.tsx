@@ -25,7 +25,7 @@ export function NavSide({ categories }: NavSideProps) {
         return (
           <li key={c.id} className="space-y-1">
             <Link
-              href={`/${c.id}`}
+              href={`/${c.key}`}
               title={c.name}
               className={cn(
                 "block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
@@ -47,7 +47,7 @@ export function NavSide({ categories }: NavSideProps) {
                   {c.children.map((it) => (
                     <li key={it.id}>
                       <Link
-                        href={`/${it.id}`}
+                        href={`/${it.key}`}
                         title={c.name}
                         className={cn(
                           "px-2 py-1 rounded text-xs transition-colors whitespace-nowrap"

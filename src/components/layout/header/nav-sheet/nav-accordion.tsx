@@ -31,7 +31,7 @@ export function NavAccordion({ categories, onClose }: NavAccordionProps) {
       type="single"
       collapsible
       className="w-full p-4 space-y-2 mb-4"
-      defaultValue={pSlug}
+      defaultValue={pSlug?.toString()}
       aria-label="移动端分类导航"
     >
       {/* 首页 */}
@@ -53,7 +53,7 @@ export function NavAccordion({ categories, onClose }: NavAccordionProps) {
               "[&[data-state=open]]:text-white",
 
               // 选中状态
-              pSlug === "0" &&
+              !pSlug &&
                 "bg-primary! text-white [&>svg]:text-white hover:bg-primary/85!"
             )}
           >
@@ -68,7 +68,7 @@ export function NavAccordion({ categories, onClose }: NavAccordionProps) {
       {categories.map((c) => {
         const Icon = navIcon(c.id);
         return (
-          <AccordionItem key={c.id} value={c.id} className="border-b-0">
+          <AccordionItem key={c.id} value={c.key} className="border-b-0">
             <AccordionTrigger
               className={cn(
                 // 重置基础样式
@@ -87,7 +87,7 @@ export function NavAccordion({ categories, onClose }: NavAccordionProps) {
                 "[&[data-state=open]]:text-white",
 
                 // 选中状态
-                c.id === pSlug &&
+                c.key === pSlug &&
                   "bg-primary! text-white [&>svg]:text-white hover:bg-primary/85!"
               )}
             >
@@ -101,14 +101,14 @@ export function NavAccordion({ categories, onClose }: NavAccordionProps) {
               {c.children?.map((it) => (
                 <Link
                   onClick={onClose}
-                  href={`/${it.id}`}
+                  href={`/${it.key}`}
                   key={it.id}
                   title={it.name}
                   className={cn(
                     "px-3 py-1.5 cursor-pointer transition-colors",
                     "rounded-full border border-gray-300",
                     "text-sm font-medium text-gray-700",
-                    slug === it.id
+                    slug === it.key
                       ? "bg-primary text-white border-primary"
                       : "hover:bg-primary/15 hover:text-primary hover:border-primary/65"
                   )}

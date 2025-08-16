@@ -7,7 +7,12 @@ export function cn(...inputs: ClassValue[]) {
 
 // ---------------------------------------
 
-type TreeNode = { id: string | number; name: string; children?: TreeNode[] };
+type TreeNode = {
+  key: string | number;
+  id: string | number;
+  name: string;
+  children?: TreeNode[];
+};
 
 /** 查找所用父层 */
 // export function findParents(
@@ -30,20 +35,20 @@ type TreeNode = { id: string | number; name: string; children?: TreeNode[] };
 /**
  * 查找指定节点的所有父级路径（包含自己）
  * @param tree 树结构数组
- * @param targetId 目标节点 id
+ * @param target 目标节点 key
  * @returns 节点路径数组（从根到自己）
  */
 export function findPath(
   tree: TreeNode[],
-  targetId: string | number
+  target: string | number
 ): TreeNode[] | null {
   for (const node of tree) {
     // 找到自己
-    if (node.id === targetId) return [node];
+    if (node.key === target) return [node];
 
     // 递归查找子节点
     if (node.children) {
-      const path = findPath(node.children, targetId);
+      const path = findPath(node.children, target);
       if (path) return [node, ...path];
     }
   }

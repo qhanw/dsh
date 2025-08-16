@@ -23,34 +23,35 @@ export const NavWeb = ({ categories }: NavWebProps) => {
         aria-label="主导航"
       >
         <ul className="flex space-x-3">
-          {[{ id: "0", name: "首页" }, ...(categories || [])?.slice(0, 4)].map(
-            (c) => {
-              const Icon = navIcon(c.id);
+          {[
+            { id: "0", key: "", name: "首页" },
+            ...(categories || [])?.slice(0, 4),
+          ].map((c) => {
+            const Icon = navIcon(c.id);
 
-              const active =
-                slug === c.id ||
-                (!slug && !+c.id) || // 首页
-                (+c.id && pSlug === c.id);
-              return (
-                <li key={c.id}>
-                  <Link
-                    href={+c.id ? `/${c.id}` : "/"}
-                    title={c.name}
-                    className={cn(
-                      "inline-flex items-center whitespace-nowrap",
-                      "text-base text-white/85 hover:text-white",
-                      "py-2 px-3 rounded-md",
-                      "transition-colors",
-                      active && "text-white font-semibold bg-white/35 shadow-md"
-                    )}
-                  >
-                    <Icon size={18} className="mr-2" />
-                    {c.name}
-                  </Link>
-                </li>
-              );
-            }
-          )}
+            const active =
+              slug === c.key ||
+              (!slug && !c.key) || // 首页
+              (c.key && pSlug === c.key);
+            return (
+              <li key={c.id}>
+                <Link
+                  href={`/${c.key}`}
+                  title={c.name}
+                  className={cn(
+                    "inline-flex items-center whitespace-nowrap",
+                    "text-base text-white/85 hover:text-white",
+                    "py-2 px-3 rounded-md",
+                    "transition-colors",
+                    active && "text-white font-semibold bg-white/35 shadow-md"
+                  )}
+                >
+                  <Icon size={18} className="mr-2" />
+                  {c.name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
 

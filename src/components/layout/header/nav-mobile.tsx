@@ -105,29 +105,30 @@ export function NavMobile({ categories }: NavMobileProps) {
               "overflow-x-auto scroll-smooth no-scrollbar"
             )}
           >
-            {[{ id: "0", name: "首页" }, ...categories?.slice(0, 4)].map(
-              (c) => {
-                const active =
-                  slug === c.id ||
-                  (!slug && !+c.id) || // 首页
-                  (+c.id && pSlug === c.id);
-                return (
-                  <Link
-                    key={c.id}
-                    href={+c.id ? `/${c.id}` : "/"}
-                    title={c.name}
-                    className={cn(
-                      "py-2 px-3 rounded-md",
-                      "transition-all duration-200",
-                      "text-sm font-semibold text-white/85 hover:text-white",
-                      active && "relative ease-in text-white  bg-white/25"
-                    )}
-                  >
-                    {c.name}
-                  </Link>
-                );
-              }
-            )}
+            {[
+              { id: "0", key: "", name: "首页" },
+              ...categories?.slice(0, 4),
+            ].map((c) => {
+              const active =
+                slug === c.key ||
+                (!slug && !c.key) ||
+                (c.key && pSlug === c.key);
+              return (
+                <Link
+                  key={c.id}
+                  href={`/${c.key}`}
+                  title={c.name}
+                  className={cn(
+                    "py-2 px-3 rounded-md",
+                    "transition-all duration-200",
+                    "text-sm font-semibold text-white/85 hover:text-white",
+                    active && "relative ease-in text-white  bg-white/25"
+                  )}
+                >
+                  {c.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* 右侧更多按钮 - 固定位置 */}
