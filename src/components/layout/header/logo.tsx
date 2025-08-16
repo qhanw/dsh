@@ -1,10 +1,12 @@
+import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/site-config";
 
 export function Logo() {
   return (
-    <a
+    <Link
       href="/"
-      className="flex items-center flex-shrink-0 space-x-2 lg:space-x-3"
+      className="inline-flex items-center flex-shrink-0 space-x-2 lg:space-x-3"
+      title={SITE_CONFIG.shortName}
     >
       <div className="flex items-center justify-center size-8 lg:size-10">
         <img
@@ -13,11 +15,9 @@ export function Logo() {
           className="size-6 lg:size-8"
         />
       </div>
-      <div className="flex flex-col">
-        <span className="font-bold text-white leading-tight truncate text-base lg:text-xl">
-          {SITE_CONFIG.shortName}
-        </span>
-      </div>
-    </a>
+      <h1 className="font-bold text-white leading-tight truncate text-base lg:text-xl">
+        {SITE_CONFIG.shortName}
+      </h1>
+    </Link>
   );
 }

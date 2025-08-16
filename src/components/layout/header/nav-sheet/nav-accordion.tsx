@@ -1,6 +1,5 @@
 "use client";
 import { useMemo } from "react";
-import { useParams } from "next/navigation";
 import Link from "next/link";
 
 import {
@@ -14,36 +13,15 @@ import { cn } from "@/lib/utils";
 
 import { navIcon } from "../nav-icons";
 
+import { useSlug } from "../useSlug";
+
 import type { Category } from "../typing";
-
-/** 查找所用父层 */
-function findParents(
-  data: Category[],
-  aim: string,
-  path: Category[] = []
-): Category[] | undefined {
-  for (const node of data) {
-    // 找到返回父级路径
-    if (node.id === aim) return path;
-
-    if (node.children) {
-      const res = findParents(node.children, aim, [...path, node]);
-      if (res) return res;
-    }
-  }
-  return undefined;
-}
 
 type NavAccordionProps = { categories: Category[]; onClose?: () => void };
 
 export function NavAccordion({ categories, onClose }: NavAccordionProps) {
-  const params = useParams<{ category: string }>();
-
   // 计算菜单选中状态
-  const { slug, pSlug } = useMemo(() => {
-    const s = params.category;
-    return { slug: s, pSlug: findParents(categories, s)?.at(-1)?.id || "0" };
-  }, [params, categories]);
+  const { slug, pSlug } = useSlug(categories);
 
   // 或许取图标
   const Home = useMemo(() => navIcon("0"), []);

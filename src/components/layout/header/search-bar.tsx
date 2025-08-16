@@ -68,7 +68,7 @@ export function SearchBar({ className }: SearchBarProps) {
         onChange={(e) => setSearchKeyword(e.target.value)}
         onKeyUp={onKeyUp}
         placeholder="搜索视频..."
-        className="flex-1 h-10 px-6 bg-white/85 text-gray-700 focus-visible:border-none rounded-l-full"
+        className="flex-1 h-10 px-6 bg-white/85 text-base font-semibold text-gray-700 focus-visible:border-none rounded-l-full"
         aria-label="搜索视频"
       />
       {/* 清空按钮 */}
