@@ -1,24 +1,31 @@
+"use client";
+
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useSlug } from "../header/useSlug";
+
 import type { Category } from "../header/typing";
 
 type NavSideProps = { categories: Category[] };
 
 export function NavSide({ categories }: NavSideProps) {
+  const { slug, pSlug } = useSlug(categories);
+
   return (
     <ul className="space-y-2">
       <li>
-        <a
+        <Link
           href="/"
+          title="首页"
           className={cn(
-            "block px-3 py-2 rounded-md text-sm font-medium transition-colors"
-            // !urlTagIds && !urlKeywords
-            //   ? "bg-blue-500 text-white"
-            //   : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+            "block px-3 py-2 rounded-md text-sm font-medium transition-colors",
+            !slug
+              ? "bg-primary text-white"
+              : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
           )}
         >
           首页
-        </a>
+        </Link>
       </li>
 
       {categories.slice(0, 6).map((c) => {
@@ -28,13 +35,15 @@ export function NavSide({ categories }: NavSideProps) {
               href={`/${c.key}`}
               title={c.name}
               className={cn(
-                "block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors"
-                // isActive && "bg-blue-500 text-white"
+                "flex items-center px-3 py-2 rounded-md text-sm transition-all",
+                [slug, pSlug].includes(c.key)
+                  ? "bg-primary text-white [&>span]:text-white"
+                  : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               )}
             >
               {c.name}
               {c?.children?.length && (
-                <span className="ml-2 text-xs text-gray-500">
+                <span className="ml-1 text-xs text-gray-500">
                   ({c.children.length})
                 </span>
               )}
@@ -50,10 +59,10 @@ export function NavSide({ categories }: NavSideProps) {
                         href={`/${it.key}`}
                         title={c.name}
                         className={cn(
-                          "px-2 py-1 rounded text-xs transition-colors whitespace-nowrap"
-                          //   currentCategory?.id === it.id
-                          //     ? "bg-blue-500 text-white font-medium"
-                          //     : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                          "px-2 py-1 rounded text-xs transition-all whitespace-nowrap",
+                          slug === it.key
+                            ? "bg-primary text-white font-medium"
+                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                         )}
                       >
                         {it.name}
