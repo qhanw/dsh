@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { useParams } from "next/navigation";
 
-import { findParents } from "@/lib/utils";
+import { findPath } from "@/lib/utils";
 
 import type { Category } from "./typing";
 
@@ -11,6 +11,6 @@ export function useSlug(categories: Category[]) {
 
   return useMemo(() => {
     const s = params.category;
-    return { slug: s, pSlug: findParents(categories, s)?.at(-1)?.id || "0" };
+    return { slug: s, pSlug: findPath(categories, s)?.at(-2)?.id || "0" };
   }, [params, categories]);
 }

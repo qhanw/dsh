@@ -1,38 +1,32 @@
 "use client";
 
+import { useMemo } from "react";
 import { Category } from "../header/typing";
-import { useSlug } from "../header/useSlug";
 import { useParseUrl } from "./useParseUrl";
-
-// const getBreadcrumb = () => {
-//   if (urlKeywords) {
-//     return ["首页", "搜索结果"];
-//   }
-//   if (isMainCategory && currentParentCategory) {
-//     return ["首页", currentParentCategory.tag_name];
-//   }
-//   if (currentCategory && currentParentCategory) {
-//     return ["首页", currentParentCategory.tag_name, currentCategory.tag_name];
-//   }
-//   return ["首页", "热门"];
-// };
 
 type BreadcrumbProps = { categories: Category[] };
 export function Breadcrumb({ categories }: BreadcrumbProps) {
-  const a = useParseUrl(categories);
+  const info = useParseUrl(categories);
 
-  console.log(a);
+  const breadcrumbs = useMemo(() => {
+    if (info.keywords) return ["首页", "搜索结果"];
+
+    if (info.breadcrumb) {
+      return ["首页", ...(info.breadcrumb || [])?.map((c) => c.name)];
+    }
+    return ["首页", "热门"];
+  }, [info]);
 
   return (
     <header className="mb-6">
       <nav className="text-sm text-gray-600" aria-label="面包屑导航">
         <ol className="flex items-center">
-          {/* {getBreadcrumb().map((item, index) => (
-                <li key={index}>
-                  {index > 0 && <span className="mx-2">/</span>}
-                  {item}
-                </li>
-              ))} */}
+          {breadcrumbs.map((c, idx) => (
+            <li key={idx}>
+              {idx > 0 && <span className="mx-2">/</span>}
+              {c}
+            </li>
+          ))}
         </ol>
       </nav>
     </header>

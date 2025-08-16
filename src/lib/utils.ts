@@ -5,20 +5,47 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-/** 查找所用父层 */
-export function findParents(
-  data: any[],
-  aim: string,
-  path: any[] = []
-): any[] | undefined {
-  for (const node of data) {
-    // 找到返回父级路径
-    if (node.id === aim) return path;
+// ---------------------------------------
 
+type TreeNode = { id: string | number; name: string; children?: TreeNode[] };
+
+/** 查找所用父层 */
+// export function findParents(
+//   data: TreeNode[],
+//   aim: string,
+//   path: TreeNode[] = []
+// ): TreeNode[] | undefined {
+//   for (const node of data) {
+//     // 找到返回父级路径
+//     if (node.id === aim) return path;
+
+//     if (node.children) {
+//       const res = findParents(node.children, aim, [...path, node]);
+//       if (res) return res;
+//     }
+//   }
+//   return undefined;
+// }
+
+/**
+ * 查找指定节点的所有父级路径（包含自己）
+ * @param tree 树结构数组
+ * @param targetId 目标节点 id
+ * @returns 节点路径数组（从根到自己）
+ */
+export function findPath(
+  tree: TreeNode[],
+  targetId: string | number
+): TreeNode[] | null {
+  for (const node of tree) {
+    // 找到自己
+    if (node.id === targetId) return [node];
+
+    // 递归查找子节点
     if (node.children) {
-      const res = findParents(node.children, aim, [...path, node]);
-      if (res) return res;
+      const path = findPath(node.children, targetId);
+      if (path) return [node, ...path];
     }
   }
-  return undefined;
+  return null;
 }

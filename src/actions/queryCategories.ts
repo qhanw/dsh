@@ -1,9 +1,6 @@
 import { db, tag } from "@/db";
 
-type TagItem = Pick<
-  typeof tag.$inferSelect,
-  "id" | "name" | "pid" | "matchingWords"
->;
+type TagItem = Pick<typeof tag.$inferSelect, "id" | "name" | "pid" | "pinyin">;
 
 function arrayToTree(items: TagItem[]) {
   const result = []; // 存放结果集
@@ -30,7 +27,7 @@ function arrayToTree(items: TagItem[]) {
 export async function queryCategories() {
   const tags = await db.query.tag.findMany({
     where: (table, { eq }) => eq(table.status, true),
-    columns: { id: true, name: true, matchingWords: true, pid: true },
+    columns: { id: true, name: true, pinyin: true, pid: true },
   });
 
   return arrayToTree(tags);

@@ -1,4 +1,4 @@
-import { findParents } from "@/lib/utils";
+import { findPath } from "@/lib/utils";
 
 import { Category } from "../header/typing";
 import { useMemo } from "react";
@@ -8,7 +8,7 @@ export function useParseUrl(categories: Category[]) {
   const params = useParams<{ category: string }>();
   const searchParams = useSearchParams();
   const parents = useMemo(() => {
-    return findParents(categories, params.category);
+    return findPath(categories, params.category);
   }, [categories]);
 
   return { keywords: searchParams.get("keywords"), breadcrumb: parents };

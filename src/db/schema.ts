@@ -8,7 +8,7 @@ export const carouselIdSeq = pgSequence("carousel_id_seq", {  startWith: "1", in
 export const tag = pgTable("tag", {
 	id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
 	name: varchar({ length: 50 }).default('').notNull(),
-	matchingWords: varchar("matching_words", { length: 250 }).default('').notNull(),
+	pinyin: varchar({ length: 250 }).default('').notNull(),
 	// You can use { mode: "bigint" } if numbers are exceeding js number limitations
 	pid: bigint({ mode: "number" }).default(0).notNull(),
 	status: boolean().default(true).notNull(),
