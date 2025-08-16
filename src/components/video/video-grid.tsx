@@ -4,7 +4,7 @@ import { useEffect, Suspense, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { VideoCard } from './video-card';
-import { Pagination } from '@/components/ui/pagination';
+import { Pagination } from '@/components/pagination';
 import { fetchVideos, fetchHomeHot } from '@/lib/api';
 import { useVideoStore } from '@/store/video';
 import { VideoListResponse, Video, VideoQueryParams } from '@/types/video';

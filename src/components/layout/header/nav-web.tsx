@@ -15,19 +15,16 @@ type NavWebProps = { categories: Category[] };
 export const NavWeb = ({ categories }: NavWebProps) => {
   const { slug, pSlug } = useSlug(categories);
   return (
-    <div className="max-lg:hidden container mx-auto">
-      <div className="flex items-center h-16 px-8">
-        <Logo />
-        <nav
-          className="flex ml-8 flex-shrink-0 overflow-x-auto no-scrollbar"
-          style={{ overflow: "visible" }}
-          aria-label="主导航"
-        >
-          <ul className="flex space-x-3">
-            {[
-              { id: "0", name: "首页" },
-              ...(categories || [])?.slice(0, 4),
-            ].map((c) => {
+    <div className="max-lg:hidden container mx-auto flex items-center h-16">
+      <Logo />
+      <nav
+        className="flex ml-8 flex-shrink-0 overflow-x-auto no-scrollbar"
+        style={{ overflow: "visible" }}
+        aria-label="主导航"
+      >
+        <ul className="flex space-x-3">
+          {[{ id: "0", name: "首页" }, ...(categories || [])?.slice(0, 4)].map(
+            (c) => {
               const Icon = navIcon(c.id);
 
               const active =
@@ -52,12 +49,12 @@ export const NavWeb = ({ categories }: NavWebProps) => {
                   </Link>
                 </li>
               );
-            })}
-          </ul>
-        </nav>
+            }
+          )}
+        </ul>
+      </nav>
 
-        <SearchBar />
-      </div>
+      <SearchBar />
     </div>
   );
 };
