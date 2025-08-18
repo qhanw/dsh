@@ -8,8 +8,6 @@ import { NavMobile } from "./nav-mobile";
 export async function Header() {
   const list = await queryCategories();
 
-  console.log(list);
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <header className={cn("sticky top-0 left-0 w-full z-50 bg-primary")}>

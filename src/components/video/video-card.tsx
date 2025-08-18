@@ -1,24 +1,17 @@
-'use client';
+import Image from "next/image";
+import Link from "next/link";
+import { Video } from "@/types/video";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Video } from '@/types/video';
-
-interface VideoCardProps {
-  video: Video;
-}
+type VideoCardProps = { video: Video };
 
 export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
   return (
     <article className="group relative flex flex-col">
-      <Link 
-        href={`/video/${video.id}`}
-        className="flex flex-col"
-      >
+      <Link href={`/video/${video.id}`} className="flex flex-col">
         {/* 缩略图 */}
         <div className="aspect-[2/3] relative overflow-hidden rounded-lg bg-gray-200">
           <Image
-            src={video.image || '/logo.png'}
+            src={video.image || "/logo.png"}
             alt={video.name}
             fill
             className="object-cover transition-transform group-hover:scale-105"
@@ -35,10 +28,12 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
           <h3 className="text-sm font-medium line-clamp-1">{video.name}</h3>
           <div className="text-xs text-gray-500 space-y-1">
             <p className="line-clamp-1">{video.actors}</p>
-            <p>{video.period} · {video.region}</p>
+            <p>
+              {video.period} · {video.region}
+            </p>
           </div>
         </div>
       </Link>
     </article>
   );
-}; 
+};
