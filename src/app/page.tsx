@@ -1,18 +1,10 @@
-import { Sidebar } from "@/components/layout/sidebar";
-import { PageHeader } from "@/components/layout/page-header";
+import type { Metadata } from "next";
+import { getHomeTDK } from "@/lib/tdk";
+
+import { LayoutWrapper } from "@/components/layout/layout-wrapper";
+
+export const metadata: Metadata = getHomeTDK();
 
 export default function Home() {
-  return (
-    <main className="container mx-auto flex gap-6 py-8">
-      <Sidebar />
-      <section className="flex-1">
-        <PageHeader />
-
-        <div>123123</div>
-        {/* <Suspense fallback={<div>加载中...</div>}>
-          <VideoGrid />
-        </Suspense> */}
-      </section>
-    </main>
-  );
+  return <LayoutWrapper>Home</LayoutWrapper>;
 }

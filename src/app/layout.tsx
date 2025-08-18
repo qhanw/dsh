@@ -1,14 +1,9 @@
-import type { Metadata } from "next";
 import Script from "next/script";
 
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
-import { getHomeTDK } from "@/lib/tdk";
-
 import "./globals.css";
-
-export const metadata: Metadata = getHomeTDK();
 
 export default function RootLayout({
   children,
