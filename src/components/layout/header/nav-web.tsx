@@ -14,6 +14,7 @@ type NavWebProps = { categories: Category[] };
 
 export const NavWeb = ({ categories }: NavWebProps) => {
   const { slug, pSlug } = useSlug(categories);
+
   return (
     <div className="max-lg:hidden container mx-auto flex items-center h-16">
       <Logo />
@@ -30,9 +31,7 @@ export const NavWeb = ({ categories }: NavWebProps) => {
             const Icon = navIcon(c.id);
 
             const active =
-              slug === c.key ||
-              (!slug && !c.key) || // 首页
-              (c.key && pSlug === c.key);
+              slug === (c.key || "/") || (c.key && pSlug === c.key);
             return (
               <li key={c.id}>
                 <Link

@@ -53,7 +53,7 @@ export function NavAccordion({ categories, onClose }: NavAccordionProps) {
               "[&[data-state=open]]:text-white",
 
               // 选中状态
-              !pSlug &&
+              slug === "/" &&
                 "bg-primary! text-white [&>svg]:text-white hover:bg-primary/85!"
             )}
           >

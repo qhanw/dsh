@@ -110,9 +110,7 @@ export function NavMobile({ categories }: NavMobileProps) {
               ...categories?.slice(0, 4),
             ].map((c) => {
               const active =
-                slug === c.key ||
-                (!slug && !c.key) ||
-                (c.key && pSlug === c.key);
+                slug === (c.key || "/") || (c.key && pSlug === c.key);
               return (
                 <Link
                   key={c.id}
@@ -121,6 +119,7 @@ export function NavMobile({ categories }: NavMobileProps) {
                   className={cn(
                     "py-2 px-3 rounded-md",
                     "transition-all duration-200",
+                    "whitespace-nowrap",
                     "text-sm font-semibold text-white/85 hover:text-white",
                     active && "relative ease-in text-white  bg-white/25"
                   )}
