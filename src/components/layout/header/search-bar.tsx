@@ -17,12 +17,19 @@ export function SearchBar({ className }: SearchBarProps) {
   const searchParams = useSearchParams();
   const k = searchParams.get("keywords");
 
-  const [keywords, setKeywords] = useState(k || "");
+  const [keywords, setKeywords] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    if (k) setKeywords(k);
+    setKeywords(k || "");
   }, [k]);
+
+  const onClearSearch = () => {
+    setKeywords("");
+
+    router.push("/");
+    inputRef.current?.focus();
+  };
 
   const onSearch = () => {
     if (keywords.trim()) {
@@ -32,18 +39,13 @@ export function SearchBar({ className }: SearchBarProps) {
 
       // 跳转到搜索结果页面
       router.push(`/search?${params.toString()}`);
+    } else {
+      onClearSearch();
     }
   };
 
   const onKeyUp = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") onSearch();
-  };
-
-  const onClearSearch = () => {
-    setKeywords("");
-
-    router.push("/");
-    inputRef.current?.focus();
   };
 
   return (
