@@ -24,7 +24,7 @@ export default async function Home(props: {
     +(sp.page || PAGINATION.page),
     +(sp.pageSize || PAGINATION.pageSize)
   );
-  console.log('data', data)
+  console.log('home', data)
 
   return (
     <LayoutWrapper>

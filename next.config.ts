@@ -7,6 +7,13 @@ const nextConfig: NextConfig = {
 
   images: {
     remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
+        port: "8081",
+        pathname: "/**",
+      },
+
       // 主要配置 - 使用环境变量
       {
         protocol: (process.env.NEXT_PUBLIC_API_PROTOCOL || "https") as

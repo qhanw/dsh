@@ -1,7 +1,6 @@
 import { VideoCard } from "./video-card";
 // import { VideoListResponse, Video, VideoQueryParams } from "@/types/video";
 
-// 在文件开头添加 props 接口
 type VideoGridProps = { data?: any[] };
 
 // 修改组件定义
@@ -34,19 +33,19 @@ export const VideoGrid = ({ data }: VideoGridProps = {}) => {
   // }
 
   // 如果没有数据且不是加载状态，显示空状态
-  // if (!isLoading && videos.length === 0) {
-  //   return (
-  //     <section className="px-4 lg:px-0">
-  //       <div className="flex flex-col items-center justify-center py-12">
-  //         <div className="text-gray-400 text-6xl mb-4" aria-hidden="true">
-  //           📺
-  //         </div>
-  //         <h2 className="text-gray-500 text-lg mb-2">暂无相关视频</h2>
-  //         <p className="text-gray-400 text-sm">试试其他分类或搜索关键词</p>
-  //       </div>
-  //     </section>
-  //   );
-  // }
+  if (!data?.length) {
+    return (
+      <section className="px-4 lg:px-0">
+        <div className="flex flex-col items-center justify-center py-12">
+          <div className="text-gray-400 text-6xl mb-4" aria-hidden="true">
+            📺
+          </div>
+          <h2 className="text-gray-500 text-lg mb-2">暂无相关视频</h2>
+          <p className="text-gray-400 text-sm">试试其他分类或搜索关键词</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="px-4 lg:px-0">
