@@ -40,8 +40,9 @@ export async function paginate<T>(
   // 查总数
   // 这里必须用 db.select，因为 db.query.* 不支持 count
   const [{ count: total }] = await db
-    .select({ count: count() })
-    .from((table as any).table);
+    .select({ count: count(), orderBy })
+    .from((table as any).table)
+    .where(where);
 
   return { list, total, page, pageSize };
 }

@@ -5,7 +5,7 @@ import { LayoutWrapper } from "@/components/layout/layout-wrapper";
 import { Pagination } from "@/components/pagination";
 import { VideoGrid } from "@/components/video/video-grid";
 
-import { queryVideos } from "@/actions/queryVideos";
+import { queryHotVideos } from "@/actions/queryHotVideos";
 
 export const metadata: Metadata = getHomeTDK();
 
@@ -20,10 +20,11 @@ export default async function Home(props: {
 }) {
   const sp = await props.searchParams;
   // 获取热门视频
-  const data = await queryVideos(
+  const data = await queryHotVideos(
     +(sp.page || PAGINATION.page),
     +(sp.pageSize || PAGINATION.pageSize)
   );
+  console.log('data', data)
 
   return (
     <LayoutWrapper>
