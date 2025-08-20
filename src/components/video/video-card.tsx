@@ -19,7 +19,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
             unoptimized={!video.image}
           />
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 p-2">
-            <span className="text-white text-sm">{video.status_str}</span>
+            <span className="text-white text-sm">{video.statusStr}</span>
           </div>
         </div>
 

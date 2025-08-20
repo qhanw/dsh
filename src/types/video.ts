@@ -9,7 +9,7 @@ export interface Video {
   actors: string;
   region: string;
   image: string;
-  status_str: string;
+  statusStr: string;
   introduction?: string;
   playLinks?: PlayLink[];
 }
