@@ -54,3 +54,20 @@ export function findPath(
   }
   return null;
 }
+
+//
+
+export function convertImgUrl(url: string) {
+  const isDev = process.env.NODE_ENV === "development";
+
+  console.log("isDev", isDev);
+
+  if (isDev) {
+    return url.replace(
+      "http://127.0.0.1:8081",
+      `${process.env.STATIC_IMAGE_PROTOCOL}://${process.env.STATIC_IMAGE_HOSTNAME}/images`
+    );
+  }
+
+  return url;
+}

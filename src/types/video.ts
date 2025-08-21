@@ -1,5 +1,5 @@
 // 视频详情类型
-export interface Video {
+export type Video = {
   id: string;
   name: string;
   enname: string;
@@ -12,13 +12,13 @@ export interface Video {
   statusStr: string;
   introduction?: string;
   playLinks?: PlayLink[];
-}
+};
 
 // 播放链接类型
-export interface PlayLink {
+export type PlayLink = {
   title: string;
   addr: string;
-}
+};
 
 // 视频列表响应类型
 export interface VideoListResponse {
@@ -45,4 +45,4 @@ export interface VideoQueryParams {
   keywords?: string;
   pageNum?: number;
   pageSize?: number;
-} 
+}
