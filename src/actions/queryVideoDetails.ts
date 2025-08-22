@@ -19,8 +19,10 @@ export async function queryVideoDetails(id: string) {
     },
   });
 
-  return {
-    ...res,
-    playLinks: res?.playLinks ? JSON.parse(res.playLinks) : undefined,
-  };
+  return res
+    ? {
+        ...res,
+        playLinks: res.playLinks ? JSON.parse(res.playLinks) : undefined,
+      }
+    : undefined;
 }

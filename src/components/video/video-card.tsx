@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { convertImgUrl } from "@/lib/utils";
 import { Video } from "@/types/video";
 
 type VideoCardProps = { video: Video };
@@ -11,7 +12,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
         {/* 缩略图 */}
         <div className="aspect-[2/3] relative overflow-hidden rounded-lg bg-gray-200">
           <Image
-            src={video.image || "/logo.png"}
+            src={convertImgUrl(video.image) || "/logo.png"}
             alt={video.name}
             fill
             className="object-cover transition-transform group-hover:scale-105"

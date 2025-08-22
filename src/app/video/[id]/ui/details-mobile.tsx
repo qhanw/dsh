@@ -10,7 +10,7 @@ type DetailsMobileProps = {
 
 export function DetailsMobile({ video }: DetailsMobileProps) {
   return (
-    <div className="p-3 mb-3 flex items-start gap-4 lg:hidden">
+    <div className="flex items-start gap-4 lg:hidden">
       {/* 视频海报 */}
       <VideoCover data={video} />
 
@@ -31,7 +31,7 @@ export function DetailsMobile({ video }: DetailsMobileProps) {
           <div>{video.actors}</div>
         </div>
 
-        <VideoTools data={video} />
+        <VideoTools isMobile data={video} />
       </div>
     </div>
   );

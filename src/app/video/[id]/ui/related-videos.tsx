@@ -1,6 +1,7 @@
 "use client";
 
 import { fetchVideos } from "@/lib/api";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { VideoCard } from "@/components/video/video-card";
 
 import { Video } from "@/types/video";
@@ -35,50 +36,51 @@ export function RelatedVideos({ video }: any) {
     }
   };
 
-  return (
-    <>
-      {/* 相关推荐 */}
-      {relatedVideos.length > 0 && (
-        <div className="bg-white rounded-lg p-6 shadow-sm">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-            <span className="bg-primary-500 text-white px-3 py-1 rounded-full text-sm mr-3">
-              推荐
-            </span>
-            相关推荐
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
-            {(() => {
-              // 去重处理
-              const uniqueRelatedVideos = relatedVideos.filter(
-                (video, index, self) =>
-                  index === self.findIndex((v) => v.id === video.id)
-              );
+  if (!relatedVideos.length) return null;
 
-              return uniqueRelatedVideos.map((relatedVideo, index) => (
-                <div
-                  key={`related-${relatedVideo.id}`}
-                  className="group cursor-pointer"
-                  onClick={() => {
-                    if (typeof window !== "undefined") {
-                      window.location.href = `/video/${relatedVideo.id}`;
-                    }
-                  }}
-                >
-                  <VideoCard video={relatedVideo} />
-                  <div className="mt-2 text-center">
-                    <h4 className="text-sm font-medium text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-2">
-                      {relatedVideo.name}
-                    </h4>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {relatedVideo.period} • {relatedVideo.region}
-                    </p>
-                  </div>
+  return (
+    <Card className="border-gray-100">
+      <CardHeader>
+        <CardTitle>
+          <span className="bg-primary text-white px-3 py-1 rounded-full text-sm mr-3">
+            推荐
+          </span>
+          相关推荐
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4">
+          {(() => {
+            // 去重处理
+            const uniqueRelatedVideos = relatedVideos.filter(
+              (video, index, self) =>
+                index === self.findIndex((v) => v.id === video.id)
+            );
+
+            return uniqueRelatedVideos.map((relatedVideo, index) => (
+              <div
+                key={`related-${relatedVideo.id}`}
+                className="group cursor-pointer"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.location.href = `/video/${relatedVideo.id}`;
+                  }
+                }}
+              >
+                <VideoCard video={relatedVideo} />
+                <div className="mt-2 text-center">
+                  <h4 className="text-sm font-medium text-gray-800 group-hover:text-primary-600 transition-colors line-clamp-2">
+                    {relatedVideo.name}
+                  </h4>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {relatedVideo.period} • {relatedVideo.region}
+                  </p>
                 </div>
-              ));
-            })()}
-          </div>
+              </div>
+            ));
+          })()}
         </div>
-      )}
-    </>
+      </CardContent>
+    </Card>
   );
 }
