@@ -4,7 +4,7 @@ export function VideoIntroduction({
   name,
   intro,
 }: {
-  name: string;
+  name?: string;
   intro?: string;
 }) {
   if (!intro) return null;
@@ -28,20 +28,16 @@ export function VideoIntroduction({
           const sentences = optimizedIntro
             .split(/[。！？]/)
             .filter((s) => s.trim());
-          const movieName = name;
+          const movieName = name || "";
           let enhancedIntro = "";
 
-          sentences.forEach((sentence, index) => {
-            if (sentence.trim()) {
+          sentences.forEach((c, idx) => {
+            if (c.trim()) {
               // 每隔2-3句话添加一次电影名称
-              if (
-                index > 0 &&
-                index % 2 === 0 &&
-                !sentence.includes(movieName)
-              ) {
-                enhancedIntro += `${sentence}。${movieName}的精彩剧情继续展开，`;
+              if (idx > 0 && idx % 2 === 0 && !c.includes(movieName)) {
+                enhancedIntro += `${c}。${movieName}的精彩剧情继续展开，`;
               } else {
-                enhancedIntro += `${sentence}。`;
+                enhancedIntro += `${c}。`;
               }
             }
           });

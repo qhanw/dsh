@@ -1,18 +1,22 @@
 // 视频详情类型
-export type Video = {
-  id: string;
-  name: string;
-  enname: string;
-  language: string;
-  period: string;
-  directors: string;
-  actors: string;
-  region: string;
-  image: string;
-  statusStr: string;
-  introduction?: string;
-  playLinks?: PlayLink[];
-};
+import { video } from "@/db";
+
+type SelectVideo = typeof video.$inferSelect;
+
+export type Video = Pick<
+  SelectVideo,
+  | "id"
+  | "name"
+  | "enname"
+  | "language"
+  | "period"
+  | "directors"
+  | "actors"
+  | "region"
+  | "image"
+  | "statusStr"
+  | "introduction"
+> & { playLinks: PlayLink[]; ["propName"]?: any };
 
 // 播放链接类型
 export type PlayLink = {

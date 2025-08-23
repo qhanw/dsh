@@ -57,7 +57,8 @@ export function findPath(
 
 //
 
-export function convertImgUrl(url: string) {
+export function convertImgUrl(url?: string) {
+  if (!url) return;
   const isDev = process.env.NODE_ENV === "development";
 
   console.log("isDev", isDev);
