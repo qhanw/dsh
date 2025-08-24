@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PAGINATION } from "@/cfg";
 import { getHomeTDK } from "@/lib/tdk";
 
 import { LayoutWrapper } from "@/components/layout/layout-wrapper";
@@ -8,8 +9,6 @@ import { VideoGrid } from "@/components/video/video-grid";
 import { queryHotVideos } from "@/actions/queryHotVideos";
 
 export const metadata: Metadata = getHomeTDK();
-
-const PAGINATION = { page: 1, pageSize: 24 };
 
 type Params = Promise<{ slug: string }>;
 type SearchParams = Promise<{ [key: string]: string | number | undefined }>;
@@ -24,7 +23,7 @@ export default async function Home(props: {
     +(sp.page || PAGINATION.page),
     +(sp.pageSize || PAGINATION.pageSize)
   );
-  console.log('home', data)
+  console.log("home", data);
 
   return (
     <LayoutWrapper>

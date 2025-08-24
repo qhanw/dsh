@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SITE_CONFIG } from "@/cfg/site-config";
+import { SITE_CONFIG } from "@/cfg";
 
 export function Logo() {
   return (
@@ -10,8 +10,8 @@ export function Logo() {
     >
       <div className="flex items-center justify-center size-8 lg:size-10">
         <img
-          src={SITE_CONFIG.logo.image}
-          alt="Logo"
+          src={SITE_CONFIG.logo}
+          alt={SITE_CONFIG.name}
           className="size-6 lg:size-8"
         />
       </div>

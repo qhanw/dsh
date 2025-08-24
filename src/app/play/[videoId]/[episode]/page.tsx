@@ -10,7 +10,6 @@ import { Player } from "./ui/player";
 
 type Props = { params: Promise<{ videoId: string; episode: string }> };
 
-// 生成元数据
 export async function generateMetadata({ params }: Props) {
   const { videoId, episode } = await params;
 
@@ -18,7 +17,7 @@ export async function generateMetadata({ params }: Props) {
 
   if (data) return getPlayPageTDK(data, episode);
 
-  return getPlayPageTDK({ name: "视频播放" }, episode);
+  return getPlayPageTDK({ name: "视频播放" } as any, episode);
 }
 
 export default async function PlayPage({ params }: Props) {

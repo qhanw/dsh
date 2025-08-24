@@ -1,5 +1,6 @@
 "use client";
 
+import { SITE_CONFIG } from "@/cfg";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -40,11 +41,13 @@ export function NavSheet({ categories }: NavSheetProps) {
               <div className="w-8 h-8 flex items-center justify-center">
                 <img src="/logo.png" alt="Logo" className="w-6 h-6" />
               </div>
-              <span className="text-lg font-bold text-gray-900">乡村电影</span>
+              <span className="text-lg font-bold text-gray-900">
+                {SITE_CONFIG.shortName}
+              </span>
             </div>
           </SheetTitle>
           <SheetDescription className="hidden">
-            乡村电影 - 移动端分类导航
+            {SITE_CONFIG.shortName} - 移动端分类导航
           </SheetDescription>
         </SheetHeader>
 

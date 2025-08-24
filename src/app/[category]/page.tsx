@@ -1,11 +1,28 @@
 import type { Metadata } from "next";
 
-import { getHomeTDK } from "@/lib/tdk";
+import { getCategoryTDK } from "@/lib/tdk";
 import { queryVideosByTag } from "@/actions/queryVideosByTag";
 import { VideoGrid } from "@/components/video/video-grid";
 import { Pagination } from "@/components/pagination";
+import { queryCategories } from "@/actions/queryCategories";
+import { findPath } from "@/lib/utils";
+import { tag } from "@/db";
 
-export const metadata: Metadata = getHomeTDK();
+// 生成元数据
+export async function generateMetadata(props: {
+  params: Promise<{ category: string }>;
+}) {
+  const match = await props.params;
+  const tags = await queryCategories();
+
+  if (tags?.length) {
+    const breadcrumb = findPath(tags, match.category);
+
+    if (breadcrumb) return getCategoryTDK(breadcrumb.map((c) => c.name));
+  }
+
+  return getCategoryTDK(["分类"]);
+}
 
 const PAGINATION = { page: 1, pageSize: 24 };
 

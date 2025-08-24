@@ -23,7 +23,7 @@ export function VideoCover({
       )}
     >
       <Image
-        src={convertImgUrl(data.image)}
+        src={convertImgUrl(data.image) || "/logo.png"}
         alt={data.name}
         fill
         className="object-cover"

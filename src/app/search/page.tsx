@@ -1,21 +1,23 @@
-import type { Metadata } from "next";
-
-import { getHomeTDK } from "@/lib/tdk";
+import { PAGINATION } from "@/cfg";
+import { getSearchTDK } from "@/lib/tdk";
 import { queryByKeywords } from "@/actions/queryByKeywords";
 import { VideoGrid } from "@/components/video/video-grid";
 import { Pagination } from "@/components/pagination";
 
-export const metadata: Metadata = getHomeTDK();
+type Props = {
+  params: Promise<{ category: string }>;
+  searchParams: Promise<{ [key: string]: string | number | undefined }>;
+};
 
-const PAGINATION = { page: 1, pageSize: 24 };
+export async function generateMetadata(props: Props) {
+  const keywords = (await props.searchParams).keywords;
 
-type Params = Promise<{ category: string }>;
-type SearchParams = Promise<{ [key: string]: string | number | undefined }>;
+  if (keywords) {
+    return getSearchTDK(keywords.toString());
+  }
+}
 
-export default async function Search(props: {
-  params: Params;
-  searchParams: SearchParams;
-}) {
+export default async function Search(props: Props) {
   const sp = await props.searchParams;
   const match = await props.params;
   // 获取热门视频
