@@ -21,7 +21,7 @@ export type Video = Pick<
 // 播放链接类型
 export type PlayLink = {
   title: string;
-  addr: string;
+  originLink: string;
 };
 
 // 视频列表响应类型
