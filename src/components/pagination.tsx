@@ -88,9 +88,10 @@ export const Pagination = ({
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className={cn(
-          "flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-sm rounded-lg transition-all duration-200",
+          "flex items-center justify-center size-10 sm:size-12 text-sm rounded-lg transition-all duration-200",
           "hover:bg-gray-100 hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed",
           "border border-gray-200 hover:border-gray-300",
+          "cursor-pointer",
           currentPage === 1
             ? "text-gray-400 bg-gray-50"
             : "text-gray-700 hover:text-gray-900 bg-white"
@@ -98,7 +99,7 @@ export const Pagination = ({
         aria-label="上一页"
       >
         <svg
-          className="w-4 h-4"
+          className="size-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -118,7 +119,7 @@ export const Pagination = ({
           return (
             <span
               key={`ellipsis-${index}`}
-              className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-sm text-gray-500 font-medium"
+              className="flex items-center justify-center size-10 sm:size-12 text-sm text-gray-500 font-medium cursor-pointer"
             >
               ...
             </span>
@@ -133,8 +134,9 @@ export const Pagination = ({
             key={pageNumber}
             onClick={() => onPageChange(pageNumber)}
             className={cn(
-              "flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-sm rounded-lg transition-all duration-200",
+              "flex items-center justify-center size-10 sm:size-12 text-sm rounded-lg transition-all duration-200",
               "hover:shadow-sm border",
+              "cursor-pointer",
               isActive
                 ? "bg-primary text-white border-primary hover:bg-primary/85 hover:border-primary/85 shadow-sm"
                 : "text-gray-700 hover:text-gray-900 bg-white border-gray-200 hover:border-gray-300 hover:bg-gray-50"
@@ -152,9 +154,10 @@ export const Pagination = ({
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className={cn(
-          "flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 text-sm rounded-lg transition-all duration-200",
+          "flex items-center justify-center size-10 sm:size-12 text-sm rounded-lg transition-all duration-200",
           "hover:bg-gray-100 hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed",
           "border border-gray-200 hover:border-gray-300",
+          "cursor-pointer",
           currentPage === totalPages
             ? "text-gray-400 bg-gray-50"
             : "text-gray-700 hover:text-gray-900 bg-white"
@@ -162,7 +165,7 @@ export const Pagination = ({
         aria-label="下一页"
       >
         <svg
-          className="w-4 h-4"
+          className="size-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

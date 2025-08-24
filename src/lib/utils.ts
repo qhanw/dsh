@@ -61,8 +61,6 @@ export function convertImgUrl(url?: string) {
   if (!url) return;
   const isDev = process.env.NODE_ENV === "development";
 
-  console.log("isDev", isDev);
-
   if (isDev) {
     return url.replace(
       "http://127.0.0.1:8081",
