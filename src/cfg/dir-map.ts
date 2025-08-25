@@ -1,11 +1,13 @@
 // 过滤掉指定目前
 const filter = (c: string) =>
   ![
+    // 固定目录
     "play",
     "search",
     "video",
+    "vid",
 
-    // 排除其它
+    // 排除其它意义不大的目录
     "actor",
     "cctv",
     "help",

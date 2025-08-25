@@ -25,7 +25,7 @@ export async function SimilarVideos({ video }: { video: Video }) {
           <Link
             key={c.id}
             className="flex space-x-3 group cursor-pointer hover:bg-gray-800 p-2 rounded transition-colors"
-            href={`/video/${c.id}`}
+            href={`/vid/${c.id}`}
           >
             <div className="w-20 h-12 relative bg-gray-800 rounded overflow-hidden flex-shrink-0">
               <Image

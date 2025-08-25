@@ -169,7 +169,7 @@ export const generateBreadcrumbs = (
 
   if (path.startsWith("/category/")) {
     breadcrumbs.push({ name: categoryName || "分类", url: path });
-  } else if (path.startsWith("/video/")) {
+  } else if (path.startsWith("/vid/")) {
     breadcrumbs.push({ name: "视频详情", url: "#" });
     if (videoName) {
       breadcrumbs.push({ name: videoName, url: "#" });

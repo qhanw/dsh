@@ -7,7 +7,7 @@ type VideoCardProps = { video: Video };
 
 export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
   return (
-    <Link href={`/video/${video.id}`} className="group flex flex-col">
+    <Link href={`/vid/${video.id}`} className="group flex flex-col">
       {/* 缩略图 */}
       <div className="aspect-[2/3] relative overflow-hidden rounded-lg bg-gray-200">
         <Image
