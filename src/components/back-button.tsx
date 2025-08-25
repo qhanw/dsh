@@ -33,7 +33,7 @@ export function BackButton({
   };
 
   return (
-    <Button size="lg" onClick={onBack} className={cn(className)}>
+    <Button onClick={onBack} className={cn(className)}>
       ← 返回
     </Button>
   );
