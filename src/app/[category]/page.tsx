@@ -4,6 +4,7 @@ import { VideoGrid } from "@/components/video/video-grid";
 import { Pagination } from "@/components/pagination";
 import { queryCategories } from "@/actions/queryCategories";
 import { findPath } from "@/lib/utils";
+import { PAGINATION } from "@/cfg";
 
 // 生成元数据
 export async function generateMetadata(props: {
@@ -20,8 +21,6 @@ export async function generateMetadata(props: {
 
   return getCategoryTDK(["分类"]);
 }
-
-const PAGINATION = { page: 1, pageSize: 24 };
 
 type Params = Promise<{ category: string }>;
 type SearchParams = Promise<{ [key: string]: string | number | undefined }>;

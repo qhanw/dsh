@@ -15,7 +15,7 @@ export function Footer() {
           <div className="text-sm text-gray-400">
             {SITE_CONFIG.shortName}易记域名：
             <Link href="/" title={SITE_CONFIG.shortName}>
-              {SITE_CONFIG.domain}
+              {new URL(SITE_CONFIG.domain).hostname}
             </Link>
           </div>
 
@@ -30,7 +30,7 @@ export function Footer() {
               href="/rss/baidu.xml"
               className="hover:text-gray-300 transition-colors mr-4"
             >
-              百度蜘蛛地图
+              百度RSS
             </a>
           </div>
 
