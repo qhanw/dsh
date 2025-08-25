@@ -11,7 +11,9 @@ type TreeNode = {
   key: string | number;
   id: string | number;
   name: string;
+
   children?: TreeNode[];
+  ["propName"]?: any;
 };
 
 /** 查找所用父层 */

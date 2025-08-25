@@ -1,4 +1,19 @@
-export const oldDir = [
+// 过滤掉指定目前
+const filter = (c: string) =>
+  ![
+    "play",
+    "search",
+    "video",
+
+    // 排除其它
+    "actor",
+    "cctv",
+    "help",
+    "member",
+    "user",
+  ].includes(c);
+
+export const dir = [
   "actor",
   "aiqingpian",
   "bagua",
@@ -63,4 +78,4 @@ export const oldDir = [
   "zonghe",
   "zongyi",
   "zongyijuqing",
-];
+].filter(filter);

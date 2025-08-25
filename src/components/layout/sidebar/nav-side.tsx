@@ -57,7 +57,7 @@ export function NavSide({ categories }: NavSideProps) {
                     <li key={it.id}>
                       <Link
                         href={`/${it.key}`}
-                        title={c.name}
+                        title={it.name}
                         className={cn(
                           "px-2 py-1 rounded text-xs transition-all whitespace-nowrap",
                           slug === it.key

@@ -1,12 +1,9 @@
-import type { Metadata } from "next";
-
 import { getCategoryTDK } from "@/lib/tdk";
 import { queryVideosByTag } from "@/actions/queryVideosByTag";
 import { VideoGrid } from "@/components/video/video-grid";
 import { Pagination } from "@/components/pagination";
 import { queryCategories } from "@/actions/queryCategories";
 import { findPath } from "@/lib/utils";
-import { tag } from "@/db";
 
 // 生成元数据
 export async function generateMetadata(props: {
@@ -41,7 +38,6 @@ export default async function Category(props: {
     +(sp.page || PAGINATION.page),
     +(sp.pageSize || PAGINATION.pageSize)
   );
-  console.log("category", data);
 
   return (
     <>
