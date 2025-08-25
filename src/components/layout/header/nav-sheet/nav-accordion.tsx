@@ -66,7 +66,7 @@ export function NavAccordion({ categories, onClose }: NavAccordionProps) {
       </AccordionItem>
 
       {categories.map((c) => {
-        const Icon = navIcon(c.id);
+        const Icon = navIcon(c.id.toString());
         return (
           <AccordionItem key={c.id} value={c.key} className="border-b-0">
             <AccordionTrigger

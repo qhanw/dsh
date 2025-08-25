@@ -28,7 +28,7 @@ export const NavWeb = ({ categories }: NavWebProps) => {
             { id: "0", key: "", name: "首页" },
             ...(categories || [])?.slice(0, 4),
           ].map((c) => {
-            const Icon = navIcon(c.id);
+            const Icon = navIcon(c.id.toString());
 
             const active =
               slug === (c.key || "/") || (c.key && pSlug === c.key);

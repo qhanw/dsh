@@ -1,6 +1,6 @@
 export type Category = {
   key: string;
-  id: string;
+  id: number;
   name: string;
   children?: Category[];
 };
